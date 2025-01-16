@@ -27,7 +27,8 @@ jobs:
       run: |
         node _worker.js  
       env:
-        DOMAIN: ${{ secrets.DOMAIN }}  # 从 GitHub Secrets 中读取配置信息
+        JC_TYPE: ${{ secrets.JC_TYPE }} 
+        DOMAIN: ${{ secrets.DOMAIN }}  
         USERNAME: ${{ secrets.USERNAME }}
         PASSWORD: ${{ secrets.PASSWORD }}
         TG_TOKEN: ${{ secrets.TG_TOKEN }}
