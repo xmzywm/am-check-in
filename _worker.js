@@ -6,6 +6,7 @@ let token;
 let botToken = '';  
 let chatId = '';  
 let checkInResult;
+let jcType;  
  // 初始化变量
 let fetch, Response; 
 
@@ -16,6 +17,7 @@ if (typeof globalThis.fetch === "undefined") {
     Response = module.Response;
     console.log("在 Node.js 环境中，已导入 node-fetch");
     const env = {
+        JC_TYPE: process.env.JC_TYPE,
         DOMAIN: process.env.DOMAIN,
         USERNAME: process.env.USERNAME,
         PASSWORD: process.env.PASSWORD,
@@ -23,6 +25,7 @@ if (typeof globalThis.fetch === "undefined") {
         TG_TOKEN: process.env.TG_TOKEN,
         TG_ID: process.env.TG_ID
     };
+   //console.log("在 Node.js 环境中env",env);
 
     const handler = {
         async scheduled(controller, env) {
@@ -83,10 +86,13 @@ export default {
 async function handleCheckIn() {
     try {
         validateConfig();
-
-        const cookies = await loginAndGetCookies();
-        checkInResult = await performCheckIn(cookies);
-
+        if (jcType === "hongxingdl") {
+          checkInResult = await hongxingdlCheckIn();
+        } else {
+          const cookies = await loginAndGetCookies();
+          checkInResult = await performCheckIn(cookies);
+        }
+ 
         await sendMessage(checkInResult);
         return new Response(checkInResult, { status: 200 });
     } catch (error) {
@@ -161,6 +167,38 @@ async function performCheckIn(cookies) {
     return `🎉 签到结果 🎉\n${jsonResponse.msg || "签到完成"}`;
 }
 
+async function hongxingdlCheckIn() {
+    const checkInUrl = atob("aHR0cHM6Ly9zaWduLmhvbmd4aW5nLm9uZS9zaWdu");
+    const response = await fetch(checkInUrl, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36',
+            'Accept': 'application/json, text/plain, */*',
+            'X-Requested-With': 'XMLHttpRequest'
+        },
+        body: JSON.stringify({ email: username , password: password }), 
+    });
+
+    if (!response.ok) {
+        throw new Error(`签到请求失败: ${await response.text()}`);
+    }
+
+    const jsonResponse = await response.json();
+    //console.log("签到信息:", jsonResponse);
+    if (response.status !== 200) {
+        throw new Error(`签到失败: ${jsonResponse.data?.mag ?? "未知错误"}`);
+    }
+ 
+    const bytesToMB = jsonResponse.data?.bytes ? jsonResponse.data.bytes / (1024 * 1024) : null;
+    const str = bytesToMB ? (
+      bytesToMB >= 1024 
+      ? `，您获得了 ${(bytesToMB / 1024).toFixed(3)} GB 流量.` 
+      : `，您获得了 ${bytesToMB.toFixed(3)} MB 流量.` 
+    ) : '';
+    return `🎉 签到结果 🎉\n${jsonResponse.data?.mag ?? "签到完成"}${str}`;
+}
+
 async function sendMessage(msg) {
     if (!botToken || !chatId) {  
         console.log("Telegram 推送未启用. 消息内容:", msg);
@@ -226,10 +264,14 @@ async function initConfig(env) {
     token = env.TOKEN || token;  
     botToken = env.TG_TOKEN || botToken;  
     chatId = env.TG_ID || chatId; 
-
+    jcType = env.JC_TYPE || jcType; 
+    
     checkInResult = `配置信息: 
+    机场类型: ${jcType} 
     登录地址: ${maskSensitiveData(domain, 'url')} 
     登录账号: ${maskSensitiveData(username, 'email')} 
     登录密码: ${maskSensitiveData(password)} 
     TG 推送:  ${botToken && chatId ? "已启用" : "未启用"} `;
+ 
+    //console.log("initConfig-->", checkInResult);
 }
