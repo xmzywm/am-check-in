@@ -1,5 +1,6 @@
 # [am-check-in](https://github.com/amclubs/am-check-in)
-这是一个用来机场自动签到免费领取流量的自动脚本，一份代码支持多种运行环境，支持GitHub Actions、支持 Cloudflare Workers 和 Pages平台 的自动签到脚本，释放你的双手出去City Walk
+这是一个用来机场自动签到免费领取流量的自动脚本，一份代码支持多种运行环境，支持GitHub Actions、支持 Cloudflare Workers 和 Pages平台的自动签到脚本，释放你的双手出去City Walk
+- 支持 69云机场、红杏云机场、其它待验证
 
 #
 ▶️ **新人[YouTube](https://youtube.com/@AM_CLUB)** 需要您的支持，请务必帮我**点赞**、**关注**、**打开小铃铛**，***十分感谢！！！*** ✅
@@ -7,7 +8,8 @@
 </br>✅**解锁更多技术请点击进入 YouTube频道[【@AM_CLUB】](https://youtube.com/@AM_CLUB) 、[【个人博客】](https://am.809098.xyz)** 、TG群[【AM科技 | 分享交流群】](https://t.me/AM_CLUBS) 、获取免费节点[【进群发送关键字: 订阅】](https://t.me/AM_CLUBS)
 
 #
-- [部署视频教程](https://youtu.be/b7AI447ZnuA)
+- [69云机场部署视频教程](https://youtu.be/b7AI447ZnuA)
+- [红杏云机场部署视频教程](https://youtu.be/b7AI447ZnuA)
 
 ## 一、GitHub Actions使用方法
 - 项目地址: https://github.com/amclubs/am-check-in
@@ -46,6 +48,7 @@ on:
 ## 三、变量说明
 | 变量名 | 示例 | 必填 | 备注 | 
 |--|--|--|--|
+| `JC_TYPE` | `hongxingdl` |✅| 机场标识 69云机场填：69yun69  红杏云机场填：hongxingdl |
 | `DOMAIN` | `xxx.com` |✅| 机场域名 |
 | `USERNAME` | `xx@xx.com` |✅| 机场账户邮箱 |
 | `PASSWORD` | `pwd` |✅| 机场账户密码 |
