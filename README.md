@@ -52,7 +52,7 @@ on:
 | `DOMAIN` | `xxx.com` |✅| 机场域名 |
 | `USERNAME` | `xx@xx.com` |✅| 机场账户邮箱 |
 | `PASSWORD` | `pwd` |✅| 机场账户密码 |
-| `TOKEN` | `auto` |❌|自动签到变量 |
+| `TOKEN` | `auto` |❌|自动签到变量(Cloudflare方式才使用) |
 | `TG_TOKEN` | `6901234567:XXXXXXXXXX0qExxxhHxxbXXX` |❌| 发送TG通知机器人的token | 
 | `TG_ID` | `6901234567` |❌| 接收TG通知的账户ID | 
 
