@@ -1,4 +1,5 @@
 
+
 let domain = "Enter your domain here";
 let username = "Enter your email here";
 let password = "Enter your password here"; 
@@ -186,7 +187,7 @@ async function hongxingdlCheckIn() {
 
     const jsonResponse = await response.json();
     console.log("签到信息:", jsonResponse);
-    if (response.status !== 200) {
+    if (jsonResponse.status !== 200) {
         throw new Error(`签到失败: ${jsonResponse.data?.mag ?? "未知错误"}`);
     }
  
