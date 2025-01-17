@@ -185,7 +185,7 @@ async function hongxingdlCheckIn() {
     }
 
     const jsonResponse = await response.json();
-    //console.log("签到信息:", jsonResponse);
+    console.log("签到信息:", jsonResponse);
     if (response.status !== 200) {
         throw new Error(`签到失败: ${jsonResponse.data?.mag ?? "未知错误"}`);
     }
