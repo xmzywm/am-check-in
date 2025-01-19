@@ -9,7 +9,7 @@
 
 #
 - [69云机场部署视频教程](https://youtu.be/b7AI447ZnuA)
-- [红杏云机场部署视频教程](https://youtu.be/b7AI447ZnuA)
+- [红杏云机场部署视频教程](https://youtu.be/UT0YogBk_gM)
 
 ## 一、GitHub Actions使用方法
 - 项目地址: https://github.com/amclubs/am-check-in
@@ -112,10 +112,12 @@ Telegrame客户端中的acmlubs_bot收到”Hello World”，就成功了！
 
  # 
  <center><details><summary><strong> [点击展开] 赞赏支持 ~🧧</strong></summary>
- *我非常感谢您的赞赏和支持，它们将极大地激励我继续创新，持续产生有价值的工作。*
-  
+ **我非常感谢您的赞赏和支持，它们将极大地激励我继续创新，持续产生有价值的工作。**
+
+  ![image](https://github.com/user-attachments/assets/e6cdc42a-6374-4722-b833-601738f72196)
  - **USDT-TRC20:** `TWTxUyay6QJN3K4fs4kvJTT8Zfa2mWTwDD`
-  
+ - **TRX-TRC20:** `TWTxUyay6QJN3K4fs4kvJTT8Zfa2mWTwDD`
+
  </details></center>
 
  #
