@@ -36,7 +36,7 @@ if (typeof globalThis.fetch === "undefined") {
                 console.log("定时任务成功完成");
             } catch (error) {
                 console.error("定时任务失败:", error);
-                await sendMessage(`定时任务失败: ${error.message}`);
+                await sendMessage(`${jcType}定时任务失败: ${error.message}`);
             }
         }
     };
@@ -78,7 +78,7 @@ export default {
             console.log("定时任务成功完成");
         } catch (error) {
             console.error("定时任务失败:", error);
-            await sendMessage(`定时任务失败: ${error.message}`);
+            await sendMessage(`${jcType}定时任务失败: ${error.message}`);
         }
     },
 };
@@ -124,17 +124,17 @@ async function loginAndGetCookies() {
     });
 
     if (!response.ok) {
-        throw new Error(`登录失败: ${await response.text()}`);
+        throw new Error(`${jcType}登录失败: ${await response.text()}`);
     }
 
     const jsonResponse = await response.json();
     if (jsonResponse.ret !== 1) {
-        throw new Error(`登录失败: ${jsonResponse.msg || "未知错误"}`);
+        throw new Error(`${jcType}登录失败: ${jsonResponse.msg || "未知错误"}`);
     }
 
     const cookieHeader = response.headers.get("set-cookie");
     if (!cookieHeader) {
-        throw new Error("登录成功但未收到 Cookies");
+        throw new Error("${jcType}登录成功但未收到 Cookies");
     }
 
     return cookieHeader.split(',').map(cookie => cookie.split(';')[0]).join("; ");
@@ -160,7 +160,8 @@ async function performCheckIn(cookies) {
     }
 
     const jsonResponse = await response.json();
-    if (!jsonResponse.ret) {
+    console.log("签到信息:", jsonResponse);
+    if (jsonResponse.ret !== 0) {
         throw new Error(`${jcType}签到失败: ${jsonResponse.msg || "未知错误"}`);
     }
 
