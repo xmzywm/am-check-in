@@ -1,5 +1,4 @@
 
-
 let domain = "Enter your domain here";
 let username = "Enter your email here";
 let password = "Enter your password here"; 
@@ -7,7 +6,7 @@ let token;
 let botToken = '';  
 let chatId = '';  
 let checkInResult;
-let jcType;  
+let jcType = '69yun69';  
  // 初始化变量
 let fetch, Response; 
 
@@ -157,15 +156,15 @@ async function performCheckIn(cookies) {
     });
 
     if (!response.ok) {
-        throw new Error(`签到请求失败: ${await response.text()}`);
+        throw new Error(`${jcType}签到请求失败: ${await response.text()}`);
     }
 
     const jsonResponse = await response.json();
     if (!jsonResponse.ret) {
-        throw new Error(`签到失败: ${jsonResponse.msg || "未知错误"}`);
+        throw new Error(`${jcType}签到失败: ${jsonResponse.msg || "未知错误"}`);
     }
 
-    return `🎉 签到结果 🎉\n${jsonResponse.msg || "签到完成"}`;
+    return `🎉 ${jcType}签到结果 🎉\n${jsonResponse.msg || "签到完成"}`;
 }
 
 async function hongxingdlCheckIn() {
@@ -182,13 +181,13 @@ async function hongxingdlCheckIn() {
     });
 
     if (!response.ok) {
-        throw new Error(`签到请求失败: ${await response.text()}`);
+        throw new Error(`${jcType}签到请求失败: ${await response.text()}`);
     }
 
     const jsonResponse = await response.json();
     console.log("签到信息:", jsonResponse);
     if (jsonResponse.status !== 200) {
-        throw new Error(`签到失败: ${jsonResponse.data?.mag ?? "未知错误"}`);
+        throw new Error(`${jcType}签到失败: ${jsonResponse.data?.mag ?? "未知错误"}`);
     }
  
     const bytesToMB = jsonResponse.data?.bytes ? jsonResponse.data.bytes / (1024 * 1024) : null;
@@ -197,7 +196,7 @@ async function hongxingdlCheckIn() {
       ? `，您获得了 ${(bytesToMB / 1024).toFixed(3)} GB 流量.` 
       : `，您获得了 ${bytesToMB.toFixed(3)} MB 流量.` 
     ) : '';
-    return `🎉 签到结果 🎉\n${jsonResponse.data?.mag ?? "签到完成"}${str}`;
+    return `🎉 ${jcType}签到结果 🎉\n${jsonResponse.data?.mag ?? "签到完成"}${str}`;
 }
 
 async function sendMessage(msg) {
