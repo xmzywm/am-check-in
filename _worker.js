@@ -1,4 +1,3 @@
-
 let domain = "Enter your domain here";
 let username = "Enter your email here";
 let password = "Enter your password here"; 
