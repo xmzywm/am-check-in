@@ -160,7 +160,7 @@ async function performCheckIn(cookies) {
 
     const jsonResponse = await response.json();
     console.log("签到信息:", jsonResponse);
-    if (jsonResponse.ret) {
+    if (jsonResponse.ret !== 1 && jsonResponse.ret !== 0) {
         throw new Error(`${jcType}签到失败: ${jsonResponse.msg || "未知错误"}`);
     }
 
